@@ -22,8 +22,16 @@ export class DeployStack extends cdk.Stack {
     // DynamoDB Table
     const table = new dynamodb.Table(this, 'Table', {
       tableName: 'dotnet-aot-BooksTable',
-      partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
+      partitionKey: { name: 'PK', type: dynamodb.AttributeType.STRING },
+      sortKey: { name: 'SK', type: dynamodb.AttributeType.STRING },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+    });
+
+    // Add Global Secondary Index (GSI) for Type
+    table.addGlobalSecondaryIndex({
+      indexName: 'TypeIndex',
+      partitionKey: { name: 'TYPE', type: dynamodb.AttributeType.STRING },
+      projectionType: dynamodb.ProjectionType.ALL,
     });
 
     // IAM Role for Lambda functions
@@ -50,9 +58,9 @@ export class DeployStack extends cdk.Stack {
     // Lambda Functions
     const functions = [
       { name: 'dotnet-aot-GetBooksFunction', path: './BooksApiNative.Functions.GetBooks', method: apigatewayv2.HttpMethod.GET, route: '/' },
-      // { name: 'GetProductFunction', path: './GetProduct', method: apigatewayv2.HttpMethod.GET, route: '/{id}' },
-      // { name: 'DeleteProductFunction', path: './DeleteProduct', method: apigatewayv2.HttpMethod.DELETE, route: '/{id}' },
-      // { name: 'PutProductFunction', path: './PutProduct', method: apigatewayv2.HttpMethod.PUT, route: '/{id}' },
+      { name: 'dotnet-aot-AddEditBooksFunction', path: './BooksApiNative.Functions.AddEditBook', method: apigatewayv2.HttpMethod.POST, route: '/{id}' },
+      { name: 'dotnet-aot-GetBookFunction', path: './BooksApiNative.Functions.GetBook', method: apigatewayv2.HttpMethod.GET, route: '/{id}' },
+      { name: 'dotnet-aot-DeleteBookFunction', path: './BooksApiNative.Functions.DeleteBook', method: apigatewayv2.HttpMethod.DELETE, route: '/{id}' },
     ];
 
     functions.forEach(func => {

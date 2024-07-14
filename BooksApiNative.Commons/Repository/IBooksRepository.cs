@@ -8,5 +8,7 @@ public interface IBooksRepository
 
     Task<Book> GetById(string id);
 
+    Task DeleteById(string id);
+
     Task<List<Book>> GetAll();
 }
