@@ -62,9 +62,8 @@ jobs:
 
       - name: CDK Deploy
         run: |
+          cd deploy  
           sudo npm install -D typescript
           yarn install
           yarn build
-          yarn cdk deploy --require-approval never
-
-        working-directory: ./deploy
+          yarn cdk deploy --parameters LambdaArchitecture=arm64
