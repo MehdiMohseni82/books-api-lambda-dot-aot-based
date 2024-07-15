@@ -67,4 +67,4 @@ jobs:
           cd deploy
           yarn install
           yarn build
-          yarn cdk deploy --require-approval never
+          yarn cdk deploy --parameters LambdaArchitecture=arm64 --require-approval never
