@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    #   - name: Checkout repository
-    #     uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    #   - name: Setup .NET
-    #     uses: actions/setup-dotnet@v2
-    #     with:
-    #       dotnet-version: '8.x' # Specify the version of .NET SDK
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '8.x' # Specify the version of .NET SDK
 
     #   - name: Install CDK
     #     run: npm install -g aws-cdk
@@ -42,7 +42,9 @@ jobs:
           sudo apt install -y clang
           sudo apt install -y llvm binutils-aarch64-linux-gnu 
           sudo apt install -y gcc-aarch64-linux-gnu 
-        #   sudo apt install -y zlib1g-dev:arm64
+
+      - name: xxx
+        run: sudo apt install -y zlib1g-dev:arm64
 
       - name: Build AddEditBook Function
         run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.AddEditBook
