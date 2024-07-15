@@ -24,8 +24,13 @@ jobs:
     #     working-directory: ./deploy
 
       - name: Build AddEditBook Function
-        run: sudo dpkg --add-architecture arm64 
-
+        run: |
+          sudo dpkg --add-architecture arm64 
+          sudo bash -c 'cat > /etc/apt/sources.list.d/arm64.list <<EOF
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ jammy main restricted
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ jammy-updates main restricted
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ jammy-backports main restricted universe multiverse
+          EOF'
     #   - name: Build AddEditBook Function
     #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.AddEditBook
 
