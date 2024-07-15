@@ -23,7 +23,7 @@ jobs:
     #     run: npm install
     #     working-directory: ./deploy
 
-      - name: Build AddEditBook Function
+      - name: Install .Net AOT ARM64 build toolchain
         run: |
           sudo dpkg --add-architecture arm64 
           sudo bash -c 'cat > /etc/apt/sources.list.d/arm64.list <<EOF
@@ -36,17 +36,17 @@ jobs:
           sudo apt update
           sudo apt install -y clang llvm binutils-aarch64-linux-gnu gcc-aarch64-linux-gnu zlib1g-dev:arm64
 
-    #   - name: Build AddEditBook Function
-    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.AddEditBook
+      - name: Build AddEditBook Function
+        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.AddEditBook
 
-    #   - name: Build DeleteBook Function
-    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.DeleteBook
+      - name: Build DeleteBook Function
+        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.DeleteBook
 
-    #   - name: Build GetBook Function
-    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBook
+      - name: Build GetBook Function
+        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBook
 
-    #   - name: Build GetBooks Function
-    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBooks
+      - name: Build GetBooks Function
+        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBooks
 
     #   - name: CDK Deploy
     #     env:
