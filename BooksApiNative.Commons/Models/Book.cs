@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace BooksApiNative.Commons.Models;
 
@@ -19,10 +20,13 @@ public class Book
         this.Category = category;
     }
 
+    [JsonPropertyName("id")]
     public string Id { get; set; }
 
+    [JsonPropertyName("name")]
     public string Name { get; set; }
 
+    [JsonPropertyName("category")]
     public string Category { get; set; }
 
     public override string ToString()

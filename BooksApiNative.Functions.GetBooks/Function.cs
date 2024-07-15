@@ -31,7 +31,7 @@ public class Function
         Func<APIGatewayHttpApiV2ProxyRequest, ILambdaContext, Task<APIGatewayHttpApiV2ProxyResponse>> handler = FunctionHandler;
         await LambdaBootstrapBuilder.Create(handler, new SourceGeneratorLambdaJsonSerializer<CustomJsonSerializerContext>(options =>
         {
-            options.PropertyNameCaseInsensitive = true;
+            options.PropertyNameCaseInsensitive = false;
         }))
             .Build()
             .RunAsync();

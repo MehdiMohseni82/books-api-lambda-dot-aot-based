@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http;
@@ -9,9 +8,7 @@ using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.RuntimeSupport;
 using Amazon.Lambda.Serialization.SystemTextJson;
-using Amazon.Runtime.Endpoints;
 using BooksApiNative.Commons;
-using BooksApiNative.Commons.Models;
 using BooksApiNative.Commons.Repository;
 
 namespace BooksApiNative.Functions.AddEditBook;
@@ -77,7 +74,7 @@ public class Function
             return new APIGatewayHttpApiV2ProxyResponse
             {
                 StatusCode = (int)HttpStatusCode.Created,
-                Body = $"Created product with id {id}"
+                Body = $"Created book with id {book.Id}"
             };
         }
         catch (Exception e)
