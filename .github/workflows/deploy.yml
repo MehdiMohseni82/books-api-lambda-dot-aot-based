@@ -59,12 +59,13 @@ jobs:
     #       aws-region: eu-north-1
 
       - name: Install CDK
-        run: sudo npm install -g aws-cdk
+        run: |
+          npm install -g typescript
+          npm install -g ts-node
+          sudo npm install -g aws-cdk
 
       - name: CDK Deploy
-        run: |
-          sudo npm install -g typescript
-          sudo npm install typings -g
+        run:
           cd deploy
           npm install
           tsc
