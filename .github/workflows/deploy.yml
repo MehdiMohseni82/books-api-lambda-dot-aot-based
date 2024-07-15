@@ -1,8 +1,8 @@
-name: Deploy .NET AOT Lambda Functions
+name: Deploy
 
 on:
   workflow_dispatch:
-# Permission can be added at job level or workflow level    
+
 permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
@@ -17,7 +17,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '8.x' # Specify the version of .NET SDK
+          dotnet-version: '8.x' 
 
       - name: Install .Net AOT ARM64 build toolchain
         run: |
