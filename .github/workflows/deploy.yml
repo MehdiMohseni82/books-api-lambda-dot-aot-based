@@ -16,24 +16,27 @@ jobs:
         with:
           dotnet-version: '8.x' # Specify the version of .NET SDK
 
-      - name: Install CDK
-        run: npm install -g aws-cdk
+    #   - name: Install CDK
+    #     run: npm install -g aws-cdk
 
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./deploy
+    #   - name: Install dependencies
+    #     run: npm install
+    #     working-directory: ./deploy
 
       - name: Build AddEditBook Function
-        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.AddEditBook
+        run: dpkg --add-architecture arm64 
 
-      - name: Build DeleteBook Function
-        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.DeleteBook
+    #   - name: Build AddEditBook Function
+    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.AddEditBook
 
-      - name: Build GetBook Function
-        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBook
+    #   - name: Build DeleteBook Function
+    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.DeleteBook
 
-      - name: Build GetBooks Function
-        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBooks
+    #   - name: Build GetBook Function
+    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBook
+
+    #   - name: Build GetBooks Function
+    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBooks
 
     #   - name: CDK Deploy
     #     env:
