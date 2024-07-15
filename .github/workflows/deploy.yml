@@ -44,14 +44,14 @@ jobs:
       - name: Build AddEditBook Function
         run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.AddEditBook
 
-    #   - name: Build DeleteBook Function
-    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.DeleteBook
+      - name: Build DeleteBook Function
+        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.DeleteBook
 
-    #   - name: Build GetBook Function
-    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBook
+      - name: Build GetBook Function
+        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBook
 
-    #   - name: Build GetBooks Function
-    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBooks
+      - name: Build GetBooks Function
+        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBooks
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -63,7 +63,9 @@ jobs:
       - name: CDK Deploy
         run: |
           cd deploy  
-          sudo npm install -g typescript
+          sudo npm install -D typescript
           yarn install
           yarn build
-          yarn cdk deploy --parameters LambdaArchitecture=arm64 --require-approval never
+          yarn cdk deploy --require-approval never
+
+        working-directory: ./deploy
