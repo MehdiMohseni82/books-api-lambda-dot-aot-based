@@ -63,21 +63,12 @@ public class Function
 
             context.Logger.LogLine($"received Book {book}");
 
-            // if (product == null || id != product.Id)
-            // {
-            //     return new APIGatewayHttpApiV2ProxyResponse
-            //     {
-            //         Body = "Product ID in the body does not match path parameter",
-            //         StatusCode = (int)HttpStatusCode.BadRequest,
-            //     };
-            // }
-
             await _booksRepository.Add(book);
 
             return new APIGatewayHttpApiV2ProxyResponse
             {
                 StatusCode = (int)HttpStatusCode.Created,
-                Body = $"Created product with id {id}"
+                Body = $"Created book with id {book.Id}"
             };
         }
         catch (Exception e)
