@@ -14,49 +14,49 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-    #   - name: Setup .NET
-    #     uses: actions/setup-dotnet@v2
-    #     with:
-    #       dotnet-version: '8.x' # Specify the version of .NET SDK
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '8.x' # Specify the version of .NET SDK
 
-    #   - name: Install .Net AOT ARM64 build toolchain
-    #     run: |
-    #       sudo dpkg --add-architecture arm64 
-    #       sudo bash -c 'cat > /etc/apt/sources.list.d/arm64.list <<EOF
-    #       deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ jammy main restricted
-    #       deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ jammy-updates main restricted
-    #       deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ jammy-backports main restricted universe multiverse
-    #       EOF'
-    #       sudo sed -i -e 's/deb http/deb [arch=amd64] http/g' /etc/apt/sources.list
-    #       sudo sed -i -e 's/deb mirror/deb [arch=amd64] mirror/g' /etc/apt/sources.list
-    #       apt list --upgradable
-    #       sudo apt update
-    #       sudo apt install -y libc6
-    #       sudo apt install -y clang
-    #       sudo apt install -y llvm binutils-aarch64-linux-gnu 
-    #       sudo apt install -y gcc-aarch64-linux-gnu 
+      - name: Install .Net AOT ARM64 build toolchain
+        run: |
+          sudo dpkg --add-architecture arm64 
+          sudo bash -c 'cat > /etc/apt/sources.list.d/arm64.list <<EOF
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ jammy main restricted
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ jammy-updates main restricted
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ jammy-backports main restricted universe multiverse
+          EOF'
+          sudo sed -i -e 's/deb http/deb [arch=amd64] http/g' /etc/apt/sources.list
+          sudo sed -i -e 's/deb mirror/deb [arch=amd64] mirror/g' /etc/apt/sources.list
+          apt list --upgradable
+          sudo apt update
+          sudo apt install -y libc6
+          sudo apt install -y clang
+          sudo apt install -y llvm binutils-aarch64-linux-gnu 
+          sudo apt install -y gcc-aarch64-linux-gnu 
 
-    #   - name: Install zlib1g
-    #     run: sudo apt install -y zlib1g-dev:arm64
+      - name: Install zlib1g
+        run: sudo apt install -y zlib1g-dev:arm64
 
-    #   - name: Build AddEditBook Function
-    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.AddEditBook
+      - name: Build AddEditBook Function
+        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.AddEditBook
 
-    #   - name: Build DeleteBook Function
-    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.DeleteBook
+      - name: Build DeleteBook Function
+        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.DeleteBook
 
-    #   - name: Build GetBook Function
-    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBook
+      - name: Build GetBook Function
+        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBook
 
-    #   - name: Build GetBooks Function
-    #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBooks
+      - name: Build GetBooks Function
+        run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.GetBooks
 
-    #   - name: Configure AWS Credentials
-    #     uses: aws-actions/configure-aws-credentials@v4
-    #     with:
-    #       role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
-    #       role-session-name: DeployLambda
-    #       aws-region: eu-north-1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          role-session-name: DeployLambda
+          aws-region: eu-north-1
 
       - name: Install CDK
         run: |
