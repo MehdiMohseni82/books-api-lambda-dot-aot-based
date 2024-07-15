@@ -67,6 +67,6 @@ jobs:
       - name: CDK Deploy
         run: |
           cd deploy
-          npm install
-          tsc
-          cdk deploy --parameters LambdaArchitecture=arm64 --require-approval never
+          yarn install
+          yarn build
+          yarn cdk deploy --parameters LambdaArchitecture=arm64 --require-approval never
