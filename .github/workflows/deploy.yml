@@ -39,7 +39,8 @@ jobs:
           apt list --upgradable
           sudo apt update
           sudo apt install -y libc6
-        #   sudo apt install -y clang llvm binutils-aarch64-linux-gnu gcc-aarch64-linux-gnu zlib1g-dev:arm64
+          sudo apt install -y clang
+          sudo apt install -y llvm binutils-aarch64-linux-gnu 
 
       - name: Build AddEditBook Function
         run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.AddEditBook
