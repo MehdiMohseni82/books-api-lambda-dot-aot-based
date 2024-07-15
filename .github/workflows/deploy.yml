@@ -11,20 +11,20 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    #   - name: Checkout repository
+    #     uses: actions/checkout@v2
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: '8.x' # Specify the version of .NET SDK
+    #   - name: Setup .NET
+    #     uses: actions/setup-dotnet@v2
+    #     with:
+    #       dotnet-version: '8.x' # Specify the version of .NET SDK
 
-      - name: Install CDK
-        run: npm install -g aws-cdk
+    #   - name: Install CDK
+    #     run: npm install -g aws-cdk
 
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./deploy
+    #   - name: Install dependencies
+    #     run: npm install
+    #     working-directory: ./deploy
 
       - name: Install .Net AOT ARM64 build toolchain
         run: |
@@ -38,8 +38,8 @@ jobs:
           sudo sed -i -e 's/deb mirror/deb [arch=amd64] mirror/g' /etc/apt/sources.list
           apt list --upgradable
           sudo apt update
-          sudo apt install -y libc6=2.27-3ubuntu1
-          sudo apt install -y clang llvm binutils-aarch64-linux-gnu gcc-aarch64-linux-gnu zlib1g-dev:arm64
+          sudo apt install -y libc6
+        #   sudo apt install -y clang llvm binutils-aarch64-linux-gnu gcc-aarch64-linux-gnu zlib1g-dev:arm64
 
       - name: Build AddEditBook Function
         run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.AddEditBook
