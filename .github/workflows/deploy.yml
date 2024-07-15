@@ -24,7 +24,7 @@ jobs:
     #     working-directory: ./deploy
 
       - name: Build AddEditBook Function
-        run: dpkg --add-architecture arm64 
+        run: sudo dpkg --add-architecture arm64 
 
     #   - name: Build AddEditBook Function
     #     run: dotnet publish -c Release -r linux-arm64 --self-contained false ./BooksApiNative.Functions.AddEditBook
