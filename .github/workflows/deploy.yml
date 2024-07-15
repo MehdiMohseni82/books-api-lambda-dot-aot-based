@@ -65,7 +65,7 @@ jobs:
           sudo npm install -g aws-cdk
 
       - name: CDK Deploy
-        run:
+        run: |
           cd deploy
           npm install
           tsc
